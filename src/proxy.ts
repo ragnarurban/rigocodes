@@ -5,9 +5,6 @@ import createMiddleware from "next-intl/middleware";
 import { auth } from "./lib/auth";
 import { routing } from "./navigation";
 
-// FORCE THE EDGE RUNTIME FOR CLOUDFLARE COMPATIBILITY
-export const runtime = "edge";
-
 const handleI18nRouting = createMiddleware(routing);
 
 export async function proxy(request: NextRequest) {
