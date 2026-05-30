@@ -1,0 +1,66 @@
+{
+  "HomePage": {
+    "footer": "Built with care",
+    "navWebDev": "Web Dev",
+    "navGameDev": "Game Dev",
+    "navShowcase": "Showcase",
+    "navContact": "Contact",
+    "navSuggest": "Suggest",
+
+    "titleBadge": "Available for new projects",
+    "title1": "I build software that ",
+    "titleBold": "feels",
+    "title2": "as good as it works.",
+    "subTitle": "I'm Rigo - Welcome to my personal site where we explore complex topics, best practices, deep dives of web development and game development.",
+    "readBlogBtn": "Read Blog",
+    "getInTouchBtn": "Get in touch",
+    "sectionSubtitle": "Sections",
+    "sectionTitle": "Three corners of the workshop.",
+    "sectionWebTitle": "Web Development",
+    "sectionWebDescription": "Notes on building for the modern web - frameworks, performance and craft.",
+    "sectionGameTitle": "Game Development",
+    "sectionGameDescription": "Godot tutorials, game theory, and the art of making pixels move.",
+    "sectionShowcaseTitle": "Showcase",
+    "sectionShowcaseDescription": "A curated look at personal projects and side experiments",
+    "sectionBtn": "Explore",
+    "latestSubtitle": "Latest",
+    "latestTitle": "Recent writing.",
+    "exploreAllBtn": "Explore all posts"
+  },
+  "Common": {
+    "backBtn": "Back home",
+    "backBlog": "Home",
+    "emptyCardTitle": "New content is brewing",
+    "emptyCardSubtitle": "I'm working on something here. Check back soon — or read what's already published.",
+    "emptyCardReadWebBtn": "Read web dev posts",
+    "emptyCardSuggest": "Suggest a topic",
+    "backToAllPostsBtn": "Back to all posts",
+    "byRigo": "by Rigo",
+    "contents": "Table of Contents"
+  },
+  "Contact": {
+    "subtitle": "Contact",
+    "title": "Let's build something",
+    "titleColor": "good.",
+    "description": "Whether it's a freelance project, a collaboration, or just a chat about the craft — drop me a line and I'll get back to you within a couple of days.",
+    "messageTitle": "Subject",
+    "messageContent": "Your message",
+    "yourName": "Your name",
+    "pendingBtn": "Submitting...",
+    "sendBtn": "Send",
+    "thankYou": "Thank you!",
+    "backBtn": "Home"
+  },
+  "Suggest": {
+    "title": "Suggest a topic",
+    "description": "If you have any doubts or want me to create a tutorial about an expecific topic, submit the following form",
+    "topic": "Topic",
+    "category": "Category",
+    "details": "Details",
+    "pendingBtn": "Submitting...",
+    "sendBtn": "Send",
+    "thankYou": "Thank you!",
+    "backBtn": "Home"
+  },
+  "Blog": {}
+}

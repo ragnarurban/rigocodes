@@ -1,0 +1,66 @@
+{
+  "HomePage": {
+    "footer": "Creado con cariño",
+    "navWebDev": "Web Dev",
+    "navGameDev": "Game Dev",
+    "navShowcase": "Projectos",
+    "navContact": "Contacto",
+    "navSuggest": "Sugerencias",
+
+    "titleBadge": "Disponible para nuevos proyectos · 2026",
+    "title1": "Desarrollo software que ",
+    "titleBold": "funciona",
+    "title2": " y se siente bien.",
+    "subTitle": "Soy Rigo - Bienvenidos a mi blog personal donde exploro temas complejos, mejores practicas y deepdives de tanto desarrollo web como de desarrollos de juegos.",
+    "readBlogBtn": "Leer Blog",
+    "getInTouchBtn": "Contactarme",
+    "sectionSubtitle": "Secciones",
+    "sectionTitle": "Las tres esquinas de mi taller.",
+    "sectionWebTitle": "Desarrollo Web",
+    "sectionWebDescription": "Notas sobre desarrollo moderno web - frameworks, performance y artesania.",
+    "sectionGameTitle": "Desarrollo de Juegos",
+    "sectionGameDescription": "Tutoriales de Godot, teoria de juegos, y el arte de hacer que los pixeles se muevan.",
+    "sectionShowcaseTitle": "Mis Projectos",
+    "sectionShowcaseDescription": "Una lista personalizada de mis proyectos personales y experimentos",
+    "sectionBtn": "Explorar",
+    "latestSubtitle": "Ultimos",
+    "latestTitle": "Articulos recientes.",
+    "exploreAllBtn": "Ver mas"
+  },
+  "Common": {
+    "backBtn": "Volver al Inicio",
+    "backBlog": "Inicio",
+    "emptyCardTitle": "Estoy creando nuevo contenido",
+    "emptyCardSubtitle": "Estoy trabajando para agregar nuevas cosas aqui. Volve pronto - o lee algunos articulos ya disponibles.",
+    "emptyCardReadWebBtn": "Leer articulos sobre Desarrollo Web",
+    "emptyCardSuggest": "Sugerir un tema",
+    "backToAllPostsBtn": "Ver otros articulos",
+    "byRigo": "escrito por Rigo",
+    "contents": "Tabla de Contenidos"
+  },
+  "Contact": {
+    "subtitle": "Contacto",
+    "title": "Juntos desarrollemos algo ",
+    "titleColor": "genial ",
+    "description": "Ya sea un proyecto freelance, una colaboracion, o chatear sobre nuestra pasion compartida — mandame un mensaje y me comunico con vos ni bien sea posible.",
+    "messageTitle": "Asunto",
+    "messageContent": "Tu mensaje",
+    "yourName": "Tu nombre",
+    "pendingBtn": "Enviando...",
+    "sendBtn": "Enviar",
+    "thankYou": "Gracias por tu sugerencia!",
+    "backBtn": "Inicio"
+  },
+  "Suggest": {
+    "title": "Sugerir un tema",
+    "description": "Si tenes alguna duda o te gustaria que cree una tutorial acerca de un tema especifico, llena el siguiente formulario",
+    "topic": "Tema",
+    "category": "Categoria",
+    "details": "Detalles",
+    "pendingBtn": "Enviando...",
+    "sendBtn": "Enviar",
+    "thankYou": "Gracias por tu sugerencia!",
+    "backBtn": "Inicio"
+  },
+  "Blog": {}
+}
