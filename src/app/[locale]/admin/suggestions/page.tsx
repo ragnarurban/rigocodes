@@ -3,9 +3,7 @@ import { deleteSuggestion, getSuggestions } from "@/lib/suggest";
 import DeleteBtn from "../components/delete-button";
 import Empty from "../components/empty";
 
-type Props = {};
-
-const Page = async (props: Props) => {
+const Page = async () => {
   const suggestions = await getSuggestions();
   if (suggestions.length === 0) return <Empty label="No suggestions yet." />;
   return (

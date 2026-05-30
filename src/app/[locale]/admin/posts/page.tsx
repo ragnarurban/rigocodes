@@ -1,11 +1,7 @@
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 
-import { deletePost, getPosts } from "@/lib/post";
-
-import DeleteBtn from "../components/delete-button";
-
-type Props = {};
+import { getPosts } from "@/lib/post";
 
 const Page = async () => {
   const posts = await getPosts({});

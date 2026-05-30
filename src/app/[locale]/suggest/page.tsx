@@ -1,12 +1,10 @@
 import { Lightbulb } from "lucide-react";
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import SuggestionForm from "./form";
-import Link from "next/link";
 
-type Props = {};
-
-const Page = async (props: Props) => {
+const Page = async () => {
   const t = await getTranslations("Suggest");
   return (
     <section className="container-narrow py-20 md:py-28 flex flex-col">

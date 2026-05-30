@@ -3,9 +3,7 @@ import { deleteMessage, getMessages } from "@/lib/message";
 
 import DeleteBtn from "../components/delete-button";
 
-type Props = {};
-
-const Page = async (props: Props) => {
+const Page = async () => {
   const messages = await getMessages();
   if (messages.length < 1) return <Empty />;
   return (

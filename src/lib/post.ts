@@ -1,5 +1,6 @@
 "use server";
 
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import { revalidatePath } from "next/cache";
 import * as z from "zod";
 
@@ -81,7 +82,6 @@ export const createPost = async (prevState: any, formData: FormData) => {
     esBody,
   });
   if (!parsed.success) {
-    console.log("ERROR ", parsed.error);
     return {
       error: parsed.error.issues[0]?.message ?? "Invalid input",
     };
@@ -90,24 +90,24 @@ export const createPost = async (prevState: any, formData: FormData) => {
   const finalSlug = parsed.data.slug || slugify(parsed.data.title);
   if (!finalSlug || !title) return;
 
-  console.log(`[suggest.ts] New posts with:`, {
-    slug: finalSlug,
-    title: parsed.data.title,
-    description: parsed.data.description,
-    category: parsed.data.category,
-    createdAt: parsed.data.createdAt,
-    readingTime: parsed.data.readingTime,
-    tags: parsed.data.tags.split(", "),
-    content: parsed.data.content,
-    translations: {
-      esTitle: parsed.data.esTitle,
-      esDesc: parsed.data.esDesc,
-      esBody: parsed.data.esBody,
-    },
-  });
+  // console.log(`[suggest.ts] New posts with:`, {
+  //   slug: finalSlug,
+  //   title: parsed.data.title,
+  //   description: parsed.data.description,
+  //   category: parsed.data.category,
+  //   createdAt: parsed.data.createdAt,
+  //   readingTime: parsed.data.readingTime,
+  //   tags: parsed.data.tags.split(", "),
+  //   content: parsed.data.content,
+  //   translations: {
+  //     esTitle: parsed.data.esTitle,
+  //     esDesc: parsed.data.esDesc,
+  //     esBody: parsed.data.esBody,
+  //   },
+  // });
 
   try {
-    const result = await prisma.post.create({
+    await prisma.post.create({
       data: {
         title: parsed.data.title,
         slug: parsed.data.slug,
@@ -124,15 +124,11 @@ export const createPost = async (prevState: any, formData: FormData) => {
       },
     });
 
-    console.log(`[posts.ts] Created post ${JSON.stringify(result)}`);
-
     return {
       success: "Form submitted!",
     };
   } catch (e: unknown) {
-    // Not working
     const errorObject = e as PrismaClientKnownRequestError;
-    console.log("Error is ", errorObject);
     return {
       error: `API ERROR: ${errorObject?.meta?.originalMessage}`,
     };

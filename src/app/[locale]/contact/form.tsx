@@ -1,20 +1,17 @@
 "use client";
 import { Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 
 import FormField from "@/components/form-field";
-import { categories } from "@/constants";
 import { createMessage } from "@/lib/message";
-import { useTranslations } from "next-intl";
-
-type Props = {};
 
 const initialState = {
   error: null,
   success: null,
 };
 
-const ContactForm = (props: Props) => {
+const ContactForm = () => {
   const [state, action, isPending] = useActionState(
     createMessage,
     initialState,

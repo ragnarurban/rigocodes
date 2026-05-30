@@ -5,13 +5,6 @@ import * as z from "zod";
 
 import prisma from "./prisma";
 
-type Suggestion = {
-  topic: string;
-  category: string;
-  details: string;
-  email: string;
-};
-
 const schema = z.object({
   topic: z.string().trim().min(3).max(120),
   category: z.enum(["web-development", "game-development", "showcase"]),
@@ -40,9 +33,9 @@ export const createSuggestion = async (prevState: any, formData: FormData) => {
     };
   }
 
-  console.log(
-    `[suggest.ts] Add suggestion: triggered with ${parsed.data.topic} ${parsed.data.category} ${parsed.data.details} ${parsed.data.email}`,
-  );
+  // console.log(
+  //   `[suggest.ts] Add suggestion: triggered with ${parsed.data.topic} ${parsed.data.category} ${parsed.data.details} ${parsed.data.email}`,
+  // );
 
   try {
     const result = await prisma.suggestion.create({

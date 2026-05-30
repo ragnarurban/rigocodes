@@ -4,9 +4,7 @@ import { getTranslations } from "next-intl/server";
 
 import { Button } from "../../../components/ui/button";
 
-type Props = {};
-
-const Hero = async (props: Props) => {
+const Hero = async () => {
   const t = await getTranslations("HomePage");
   return (
     <section className="container-prose pt-16 pb-20 md:pt-28 md:pb-28">

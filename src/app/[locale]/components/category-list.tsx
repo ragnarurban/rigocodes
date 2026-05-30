@@ -1,17 +1,8 @@
-import {
-  ArrowUpRight,
-  Braces,
-  Code2,
-  Gamepad,
-  Gamepad2,
-  Sparkles,
-} from "lucide-react";
+import { ArrowUpRight, Code2, Gamepad2, Sparkles } from "lucide-react";
 import Link from "next/link";
-
-import { categories } from "@/constants";
 import { getTranslations } from "next-intl/server";
 
-type Props = {};
+import { categories } from "@/constants";
 
 const icons = {
   "web-development": Code2,
@@ -19,7 +10,7 @@ const icons = {
   showcase: Sparkles,
 } as const;
 
-const CategoryList = async (props: Props) => {
+const CategoryList = async () => {
   const t = await getTranslations("HomePage");
   return (
     <section className="container-prose border-t border-border py-16 md:py-24">

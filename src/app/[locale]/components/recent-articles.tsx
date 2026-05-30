@@ -2,9 +2,7 @@ import { getTranslations } from "next-intl/server";
 
 import RecentArticle from "./recent-article";
 
-type Props = {};
-
-const RecentArticles = async (props: Props) => {
+const RecentArticles = async () => {
   const t = await getTranslations("HomePage");
   return (
     <section className="container-prose border-t border-border py-16 md:py-24">

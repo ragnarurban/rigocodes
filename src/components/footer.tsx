@@ -6,9 +6,7 @@ import { getTranslations } from "next-intl/server";
 import Logo from "./nav/logo";
 import { Button } from "./ui/button";
 
-type Props = {};
-
-const Footer = async (props: Props) => {
+const Footer = async () => {
   const t = await getTranslations("HomePage");
   return (
     <div className="flex col justify-between h-20 border-mist-800 px-12 border-t-2 items-center mt-10">

@@ -7,9 +7,7 @@ import { Button } from "@/components/ui/button";
 
 import ContactForm from "./form";
 
-type Props = {};
-
-const Page = async (props: Props) => {
+const Page = async () => {
   const t = await getTranslations("Contact");
   return (
     <div className="container-narrow py-20 md:py-28">

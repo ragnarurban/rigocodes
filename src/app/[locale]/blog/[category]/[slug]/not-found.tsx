@@ -14,9 +14,7 @@ import {
 } from "@/components/ui/input-group";
 import { Kbd } from "@/components/ui/kbd";
 
-type Props = {};
-
-const Page = (props: Props) => {
+const Page = () => {
   return (
     <Empty>
       <EmptyHeader>

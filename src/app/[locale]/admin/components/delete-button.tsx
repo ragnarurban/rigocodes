@@ -2,8 +2,6 @@
 
 import { Trash2 } from "lucide-react";
 
-import { deleteSuggestion } from "@/lib/suggest";
-
 type Props = {
   id: number;
   callback: (id: number) => Promise<{ error?: string; success?: string }>;

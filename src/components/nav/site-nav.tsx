@@ -1,13 +1,11 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-import UnderlineButton from "./underline-button";
 import { useTranslations } from "next-intl";
 
-type Props = {};
+import UnderlineButton from "./underline-button";
 
-const SiteNav = (props: Props) => {
+const SiteNav = () => {
   const pathname = usePathname();
   const t = useTranslations("HomePage");
 

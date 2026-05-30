@@ -1,4 +1,4 @@
-import PostDetail from "@/app/[locale]/blog/components/post-detail";
+import PostDetail from "@/app/[locale]/blog/[category]/[slug]/components/post-detail";
 import { getPost } from "@/lib/post";
 
 type Props = {

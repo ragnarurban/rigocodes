@@ -1,9 +1,7 @@
 import { CodeXml } from "lucide-react";
 import Link from "next/link";
 
-type Props = {};
-
-function Logo({}: Props) {
+function Logo() {
   return (
     <Link href="/" className="flex align-middle items-center">
       <CodeXml />

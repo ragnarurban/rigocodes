@@ -4,9 +4,7 @@ import Logo from "./logo";
 import SiteNav from "./site-nav";
 import LangPicker from "../ui/lang-picker";
 
-type Props = {};
-
-const Navbar = (props: Props) => {
+const Navbar = () => {
   return (
     <nav className="flex col h-20 border-mist-800 border-b-2 justify-between items-center">
       <div className="pl-4 md:pl-12 flex-2 md:flex-0">

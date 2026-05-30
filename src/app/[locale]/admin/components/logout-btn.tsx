@@ -5,9 +5,7 @@ import { redirect } from "next/navigation";
 
 import { authClient } from "@/lib/auth-client";
 
-type Props = {};
-
-const LogoutBtn = (props: Props) => {
+const LogoutBtn = () => {
   return (
     <button
       onClick={async () =>

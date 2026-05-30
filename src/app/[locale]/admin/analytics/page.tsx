@@ -4,9 +4,7 @@ import { posts, messages, suggestions } from "@/constants";
 
 import Stat from "../components/stat";
 
-type Props = {};
-
-const Page = (props: Props) => {
+const Page = () => {
   const totals = {
     total: 84,
     likes: 15,

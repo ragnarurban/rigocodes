@@ -14,9 +14,7 @@ import {
 
 import Logo from "./nav/logo";
 
-type Props = {};
-
-const SideMenu = (props: Props) => {
+const SideMenu = () => {
   const t = useTranslations("HomePage");
   return (
     <div className="block md:hidden">

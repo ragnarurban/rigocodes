@@ -4,9 +4,9 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeSlug from "rehype-slug";
 
 import { getMDXComponents } from "@/app/[locale]/mdx-components";
-import { posts } from "@/constants";
 import { PostModel } from "@/generated/prisma/models";
-import { extractHeadings } from "../../../../components/blog/lib/extract-headings";
+
+import { extractHeadings } from "../lib/extract-headings";
 
 type Props = {
   post: PostModel;

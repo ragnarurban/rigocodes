@@ -8,9 +8,7 @@ import {
 
 import { Separator } from "./ui/separator";
 
-type Props = {};
-
-function SideBar({}: Props) {
+function SideBar() {
   return (
     <aside className="w-1/3 mt-8">
       <InputGroup className="max-w-xs mb-4">

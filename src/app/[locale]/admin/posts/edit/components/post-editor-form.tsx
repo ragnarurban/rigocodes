@@ -23,8 +23,6 @@ const initialState: FormState = {};
 const PostEditorForm = ({ initialPost, action, isEdit }: Props) => {
   const [state, formAction, isPending] = useActionState(action, initialState);
 
-  console.log("KLED ", initialPost);
-
   return (
     <div className="mt-4">
       {state?.success && (

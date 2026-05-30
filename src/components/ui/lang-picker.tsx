@@ -7,9 +7,7 @@ import { useRouter, usePathname } from "@/navigation";
 
 import { Button } from "./button";
 
-type Props = {};
-
-const LangPicker = (props: Props) => {
+const LangPicker = () => {
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
