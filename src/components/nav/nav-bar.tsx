@@ -2,7 +2,7 @@ import SideMenu from "../sidemenu";
 import { ModeToggle } from "../themetoggle";
 import Logo from "./logo";
 import SiteNav from "./site-nav";
-import LangPicker from "../ui/lang-picker";
+import LangPicker from "../lang-picker";
 
 const Navbar = () => {
   return (

@@ -1,5 +1,7 @@
-import PostDetail from "@/app/[locale]/blog/[category]/[slug]/components/post-detail";
-import { getPost } from "@/lib/post";
+import { Suspense } from "react";
+
+import PostDetail from "./components/post-detail";
+import PostListSkeleton from "../../components/post-list-skeleton";
 
 type Props = {
   params: Promise<{ locale: string; category: string; slug: string }>;
@@ -7,9 +9,14 @@ type Props = {
 
 const Page = async ({ params }: Props) => {
   const { locale, category, slug } = await params;
-  const post = await getPost({ category, slug });
 
-  return <PostDetail post={post} locale={locale} />;
+  return (
+    <article className="container-narrow py-16">
+      <Suspense fallback={<PostListSkeleton />}>
+        <PostDetail category={category} slug={slug} locale={locale} />
+      </Suspense>
+    </article>
+  );
 };
 
 export default Page;

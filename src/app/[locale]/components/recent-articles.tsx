@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 
-import RecentArticle from "./recent-article";
+import PostList from "../blog/components/post-list";
+import PostListSkeleton from "../blog/components/post-list-skeleton";
 
 const RecentArticles = async () => {
   const t = await getTranslations("HomePage");
@@ -17,11 +19,9 @@ const RecentArticles = async () => {
         </div>
       </div>
       <div>
-        <RecentArticle />
-        <RecentArticle />
-        <RecentArticle />
-        <RecentArticle />
-        <RecentArticle />
+        <Suspense fallback={<PostListSkeleton />}>
+          <PostList />
+        </Suspense>
       </div>
     </section>
   );

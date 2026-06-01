@@ -4,17 +4,20 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeSlug from "rehype-slug";
 
 import { getMDXComponents } from "@/app/[locale]/mdx-components";
-import { PostModel } from "@/generated/prisma/models";
+import { getPost } from "@/lib/post";
 
 import { extractHeadings } from "../lib/extract-headings";
 
 type Props = {
-  post: PostModel;
   locale: string;
+  category: string;
+  slug: string;
 };
 
-const PostDetail = async ({ post, locale }: Props) => {
+const PostDetail = async ({ category, locale, slug }: Props) => {
   const t = await getTranslations();
+
+  const post = await getPost({ category, slug });
 
   const source = locale === "es" && post?.esBody ? post?.esBody : post?.content;
   const headings = extractHeadings(source);
@@ -33,7 +36,7 @@ const PostDetail = async ({ post, locale }: Props) => {
   });
 
   return (
-    <article className="container-narrow py-16">
+    <>
       <Link
         href={`/blog/${post.category}`}
         className="mono text-xs uppercase tracking-widest text-primary"
@@ -90,7 +93,7 @@ const PostDetail = async ({ post, locale }: Props) => {
           ← {t("Common.backToAllPostsBtn")}
         </Link>
       </div>
-    </article>
+    </>
   );
 };
 

@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 
-import { EmptyCategory } from "@/app/[locale]/blog/components/empty-category";
-import PostCard from "@/app/[locale]/blog/components/post-card";
 import { Button } from "@/components/ui/button";
 import { categories, Category, CURRENT_CATEGORIES } from "@/constants";
-import { getPosts } from "@/lib/post";
+
+import PostList from "../components/post-list";
+import PostListSkeleton from "../components/post-list-skeleton";
 
 type Props = {
   params: {
@@ -23,7 +24,6 @@ const page = async ({ params }: Props) => {
   }
 
   const pageData = categories.find((element) => element.id === category);
-  const posts = await getPosts({ category });
 
   return (
     <section className="container-prose py-16 md:py-24">
@@ -42,28 +42,16 @@ const page = async ({ params }: Props) => {
       </p>
 
       <div className="mt-12">
-        {posts.length === 0 ? (
-          <EmptyCategory label={category} />
-        ) : (
-          <>
-            <div className="border-t border-border">
-              {posts.map((postObj, i) => (
-                <PostCard
-                  key={postObj.slug}
-                  featured={i === 0}
-                  post={postObj}
-                />
-              ))}
-            </div>
-            <div className="mt-10 text-center">
-              <Button size="sm" asChild>
-                <Link href="/blog/web-development">
-                  {t("HomePage.exploreAllBtn")}
-                </Link>
-              </Button>
-            </div>
-          </>
-        )}
+        <Suspense fallback={<PostListSkeleton />}>
+          <PostList category={category} />
+        </Suspense>
+      </div>
+      <div className="mt-10 text-center">
+        <Button size="sm" asChild>
+          <Link href="/blog/web-development">
+            {t("HomePage.exploreAllBtn")}
+          </Link>
+        </Button>
       </div>
     </section>
   );

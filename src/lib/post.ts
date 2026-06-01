@@ -237,14 +237,12 @@ type PostFilter = {
   id?: number;
 };
 
-export const getPosts = async (filters: PostFilter) => {
+export const getPosts = async (filters: PostFilter = {}) => {
   const posts = await prisma.post.findMany({ where: filters });
   return posts;
 };
 
-export const getPost = async (filters: PostFilter) => {
-  console.log("Filters ", filters);
-
+export const getPost = async (filters: PostFilter = {}) => {
   const posts = await prisma.post.findFirst({
     where: filters,
   });

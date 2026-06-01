@@ -5,7 +5,7 @@ import { useTransition } from "react";
 
 import { useRouter, usePathname } from "@/navigation";
 
-import { Button } from "./button";
+import { Button } from "./ui/button";
 
 const LangPicker = () => {
   const router = useRouter();
@@ -20,7 +20,7 @@ const LangPicker = () => {
   };
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="icon"
       aria-label="Change language button"
       onClick={() => setLanguage(locale === "en" ? "es" : "en")}
@@ -29,9 +29,8 @@ const LangPicker = () => {
       <Image
         src={locale === "en" ? "/en-flag.svg" : "/es-flag.svg"}
         alt={`Set language to ${locale === "en" ? "English" : "Spanish"}`}
-        width={12}
-        height={12}
-        className="w-auto"
+        width={20}
+        height={20}
       />
     </Button>
   );
