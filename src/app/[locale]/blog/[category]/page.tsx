@@ -3,11 +3,11 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
+import PostListSkeleton from "@/components/post-list-skeleton";
 import { Button } from "@/components/ui/button";
 import { categories, Category, CURRENT_CATEGORIES } from "@/constants";
 
 import PostList from "../components/post-list";
-import PostListSkeleton from "../components/post-list-skeleton";
 
 type Props = {
   params: {

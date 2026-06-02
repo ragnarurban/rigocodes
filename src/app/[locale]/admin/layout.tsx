@@ -1,4 +1,5 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { TABS } from "@/constants";
 
@@ -24,14 +25,16 @@ const layout = ({ children }: Props) => {
         <LogoutBtn />
       </div>
 
-      <div className="mt-8 flex flex-wrap gap-2 border-b border-border">
+      <div className="mt-8 flex flex-wrap gap-2 border-b border-border mb-4">
         {TABS.map((_tab) => (
           <TabBtn id={_tab.id} icon={_tab.icon} key={_tab.id}>
             {_tab.label}
           </TabBtn>
         ))}
       </div>
-      {children}
+      <ErrorBoundary fallback={<div>Error while loading component...</div>}>
+        {children}
+      </ErrorBoundary>
     </section>
   );
 };

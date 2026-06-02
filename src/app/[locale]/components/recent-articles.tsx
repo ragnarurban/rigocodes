@@ -1,8 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
+import PostListSkeleton from "@/components/post-list-skeleton";
+
 import PostList from "../blog/components/post-list";
-import PostListSkeleton from "../blog/components/post-list-skeleton";
 
 const RecentArticles = async () => {
   const t = await getTranslations("HomePage");

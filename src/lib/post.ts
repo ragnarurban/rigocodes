@@ -238,27 +238,44 @@ type PostFilter = {
 };
 
 export const getPosts = async (filters: PostFilter = {}) => {
-  const posts = await prisma.post.findMany({ where: filters });
-  return posts;
+  try {
+    const posts = await prisma.post.findMany({ where: filters });
+    return posts;
+  } catch {
+    // error handling, for now pass
+  }
 };
 
 export const getPost = async (filters: PostFilter = {}) => {
-  const posts = await prisma.post.findFirst({
-    where: filters,
-  });
-  return posts;
+  try {
+    const posts = await prisma.post.findFirst({
+      where: filters,
+    });
+    return posts;
+  } catch {
+    // error handling, for now pass
+  }
 };
 
 export const deletePost = async (id: number) => {
-  const post = await prisma.post.delete({
-    where: {
-      id,
-    },
-  });
-  revalidatePath("/admin");
-  return {
-    success: `Post ${post.id} deleted succesfully`,
-  };
+  try {
+    const post = await prisma.post.delete({
+      where: {
+        id,
+      },
+    });
+    revalidatePath("/admin");
+    return {
+      success: true,
+      message: `Post ${post.id} deleted succesfully`,
+    };
+  } catch {
+    // error handling, for now pass
+    return {
+      success: false,
+      message: "Error while deleting post.",
+    };
+  }
 };
 
 // const sortPostsDescByDate = (postList) => {

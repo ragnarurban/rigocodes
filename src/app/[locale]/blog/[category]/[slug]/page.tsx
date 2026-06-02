@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 
+import PostListSkeleton from "@/components/post-list-skeleton";
+
 import PostDetail from "./components/post-detail";
-import PostListSkeleton from "../../components/post-list-skeleton";
 
 type Props = {
   params: Promise<{ locale: string; category: string; slug: string }>;
