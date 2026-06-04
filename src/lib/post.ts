@@ -278,34 +278,6 @@ export const deletePost = async (id: number) => {
   }
 };
 
-// const sortPostsDescByDate = (postList) => {
-//   return postList.sort(
-//     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-//   );
-// };
-
-// Static JSON Index (Small to Mid Blogs): During the build process, generate a search-index.json
-// containing the title, description, and slug of every post.
-// The client fetches this small file (e.g., 50KB) and performs a local search using Fuse.js.
-
-// Naming Convention: YYYY-MM-DD-slug-title.mdx (e.g., 2026-05-15-optimizing-nextjs-mdx.mdx).
-
-// for locale:
-// In Next.js App Router, i18n is handled via a [locale] segment.
-//  Your project structure would evolve to: src/app/[locale]/blog/[category]/[slug]/page.tsx.
-
-// Content Organization:
-
-// Plaintext
-// /content
-//   /en
-//     /sports/post-one.mdx
-//   /es
-//     /sports/post-one.mdx
-// Implementation: Use a middleware to detect the user's preferred language and redirect them to the correct locale segment.
-//  In your getPost function, pass the locale from the URL to fetch the correct file path:
-// const path = \src/content/${locale}/${category}/${slug}.mdx`;`
-
 // Accesibility
 // JSON-LD Structured Data: Inject a BlogPosting schema into every page.
 // Automatic Heading IDs: Use rehype-slug to automatically add IDs to all h2 and h3 tags.

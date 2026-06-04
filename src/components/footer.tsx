@@ -1,4 +1,3 @@
-import { Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
@@ -39,29 +38,9 @@ const Footer = async () => {
             />
           </Link>
         </Button>
-        <Button variant="outline" size="sm" asChild>
-          <Link href="href">
-            <Mail />
-          </Link>
-        </Button>
       </div>
     </div>
   );
 };
-
-// <div className="flex items-center gap-2">
-//           {socials.map((s) => (
-//             <a
-//               key={s.label}
-//               href={s.href}
-//               target="_blank"
-//               rel="noreferrer"
-//               aria-label={s.label}
-//               className="grid h-10 w-10 place-items-center rounded-md border border-border text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
-//             >
-//               <s.icon className="h-4 w-4" />
-//             </a>
-//           ))}
-//         </div>
 
 export default Footer;

@@ -1,4 +1,3 @@
-import { Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
@@ -57,15 +56,6 @@ const Page = async () => {
               className="size-4 dark:invert"
             />
             <span className="font-medium">Linkedin</span>
-          </Link>
-        </Button>
-        <Button variant="outline" size="sm" asChild>
-          <Link
-            href="href"
-            className="flex items-center gap-3 bg-background p-5 hover:bg-muted/40"
-          >
-            <Mail />
-            <span className="font-medium">Email</span>
           </Link>
         </Button>
       </div>
