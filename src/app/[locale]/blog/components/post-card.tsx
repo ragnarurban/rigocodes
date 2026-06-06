@@ -10,7 +10,7 @@ type Props = {
 const PostCard = ({ post, featured = false }: Props) => {
   return (
     <Link
-      href={`/blog/${post?.category}/${post?.slug}`}
+      href={`/blog/${post?.category.key}/${post?.slug}`}
       className="group block border-b border-border py-6 transition-colors hover:bg-muted/30"
     >
       <div className="mono mb-2 flex items-center gap-3 text-xs text-muted-foreground">
@@ -27,12 +27,12 @@ const PostCard = ({ post, featured = false }: Props) => {
         {post?.description}
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
-        {post?.tags.map((tag) => (
+        {post?.tags?.map((tag) => (
           <span
-            key={`${post?.title}-${tag}`}
+            key={`${post?.title}-${tag.name}`}
             className="mono rounded-md bg-secondary px-2 py-0.5 text-xs text-secondary-foreground"
           >
-            {tag}
+            {tag.name}
           </span>
         ))}
       </div>

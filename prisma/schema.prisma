@@ -77,6 +77,23 @@ model Verification {
 
 // Blog related schemas
 
+model Category {
+  id             Int          @id @default(autoincrement())
+  key            String       @unique
+  name           String       @unique
+  translationKey String       @unique
+  active         Boolean?     @default(false)
+  posts          Post[]
+  suggestions    Suggestion[]
+}
+
+model Tag {
+  id             Int    @id @default(autoincrement())
+  name           String @unique
+  translationKey String
+  posts          Post[]
+}
+
 model Post {
   id          Int      @id @default(autoincrement())
   content     String
@@ -84,9 +101,10 @@ model Post {
   slug        String
   title       String
   description String
-  category    String
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   readingTime String
-  tags        String[]
+  tags        Tag[]
 
   esTitle String?
   esDesc  String?
@@ -96,16 +114,17 @@ model Post {
   updatedAt DateTime @updatedAt
 
   @@unique([slug, title])
-  @@index([category, slug])
+  @@index([slug])
 }
 
 model Suggestion {
-  id        Int      @id @default(autoincrement())
-  topic     String
-  category  String
-  details   String
-  email     String
-  createdAt DateTime @default(now())
+  id         Int      @id @default(autoincrement())
+  topic      String
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  details    String
+  email      String
+  createdAt  DateTime @default(now())
 
   @@unique([topic])
   @@index([topic])

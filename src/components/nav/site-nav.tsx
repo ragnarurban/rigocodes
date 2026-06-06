@@ -3,9 +3,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 
+import { CategoryModel } from "@/generated/prisma/models";
+
 import UnderlineButton from "./underline-button";
 
-const SiteNav = () => {
+type Props = {
+  categories: CategoryModel[];
+};
+
+const SiteNav = ({ categories }: Props) => {
   const pathname = usePathname();
   const t = useTranslations("HomePage");
 
@@ -15,23 +21,13 @@ const SiteNav = () => {
 
   return (
     <div className="flex-row space-x-2 hidden md:flex mr-4 justify-items-center items-center ml-8">
-      <Link href="/blog/web-development">
-        <UnderlineButton isActive={getIsActive("/blog/web-development")}>
-          {t("navWebDev")}
-        </UnderlineButton>
-      </Link>
-
-      <Link href="/blog/game-development">
-        <UnderlineButton isActive={getIsActive("/blog/game-development")}>
-          {t("navGameDev")}
-        </UnderlineButton>
-      </Link>
-
-      <Link href="/blog/showcase">
-        <UnderlineButton isActive={getIsActive("/blog/showcase")}>
-          {t("navShowcase")}
-        </UnderlineButton>
-      </Link>
+      {categories.map((category) => (
+        <Link href={`/blog/${category.key}`} key={`nav-btn-${category.key}`}>
+          <UnderlineButton isActive={getIsActive(`/blog/${category.key}`)}>
+            {t(`nav${category.translationKey}`)}
+          </UnderlineButton>
+        </Link>
+      ))}
 
       <Link href="/contact">
         <UnderlineButton isActive={getIsActive("/contact")}>

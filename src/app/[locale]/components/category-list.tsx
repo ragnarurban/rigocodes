@@ -2,7 +2,7 @@ import { ArrowUpRight, Code2, Gamepad2, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
-import { categories } from "@/constants";
+import { getCategories } from "@/lib/category";
 
 const icons = {
   "web-development": Code2,
@@ -12,6 +12,8 @@ const icons = {
 
 const CategoryList = async () => {
   const t = await getTranslations("HomePage");
+  const categories = await getCategories();
+
   return (
     <section className="container-prose border-t border-border py-16 md:py-24">
       <div className="mb-10 flex items-end justify-between gap-4">
@@ -26,11 +28,11 @@ const CategoryList = async () => {
       </div>
       <div className="grid gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-3">
         {categories.map((category) => {
-          const Icon = icons[category.id];
+          const Icon = icons[category.key];
           return (
             <Link
               key={category.id}
-              href={`/blog/${category.id}`}
+              href={`/blog/${category.key}`}
               className="group flex flex-col gap-4 bg-background p-8 transition-colors hover:bg-muted/40"
             >
               <Icon className="h-8 w-8 text-amber-300" />

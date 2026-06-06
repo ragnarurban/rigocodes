@@ -36,10 +36,6 @@ export const createMessage = async (prevState: any, formData: FormData) => {
     };
   }
 
-  console.log(
-    `[message.ts] Create message: triggered with ${parsed.data.name} ${parsed.data.title} ${parsed.data.email}`,
-  );
-
   try {
     const result = await prisma.message.create({
       data: {

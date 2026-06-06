@@ -11,10 +11,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { CategoryModel } from "@/generated/prisma/models";
 
 import Logo from "./nav/logo";
 
-const SideMenu = () => {
+type Props = {
+  categories: CategoryModel[];
+};
+
+const SideMenu = ({ categories }: Props) => {
   const t = useTranslations("HomePage");
   return (
     <div className="block md:hidden">
@@ -24,23 +29,28 @@ const SideMenu = () => {
             <Menu />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left">
+        <SheetContent
+          side="left"
+          aria-description="Site navigation mobile menu"
+        >
           <SheetHeader>
             <SheetTitle>
               <Logo />
             </SheetTitle>
           </SheetHeader>
           <div className="flex flex-col w-full">
-            <Button variant="secondary" asChild>
-              <Link href="/blog/web-development">{t("navWebDev")}</Link>
-            </Button>
+            {categories.map((category) => (
+              <Button
+                variant="secondary"
+                asChild
+                key={`site-nav-${category.key}`}
+              >
+                <Link href={`/blog/${category.key}`}>
+                  {t(`nav${category.translationKey}`)}
+                </Link>
+              </Button>
+            ))}
 
-            <Button variant="secondary" asChild>
-              <Link href="/blog/game-development">{t("navGameDev")}</Link>
-            </Button>
-            <Button variant="secondary" asChild>
-              <Link href="/blog/showcase">{t("navShowcase")}</Link>
-            </Button>
             <Button variant="secondary" asChild>
               <Link href="/contact">{t("navContact")}</Link>
             </Button>

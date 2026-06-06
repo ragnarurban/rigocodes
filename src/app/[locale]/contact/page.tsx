@@ -17,7 +17,7 @@ const Page = async () => {
         ← {t("backBtn")}
       </Link>
       <p className="mono text-xs uppercase tracking-widest text-muted-foreground mt-8">
-        {t("title")}
+        {t("subtitle")}
       </p>
       <h1 className="mt-3 font-heading text-5xl md:text-6xl font-semibold tracking-tight text-balance">
         {t("title")}
@@ -27,7 +27,7 @@ const Page = async () => {
 
       <ContactForm />
 
-      <div className="mt-16 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
+      <div className="mt-16 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
         <Button variant="outline" size="sm" asChild>
           <Link
             href="href"
@@ -59,8 +59,6 @@ const Page = async () => {
           </Link>
         </Button>
       </div>
-
-      <div className="mt-16 border-t border-border pt-8"></div>
     </div>
   );
 };

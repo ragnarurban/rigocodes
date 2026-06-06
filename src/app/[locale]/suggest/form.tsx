@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 
 import FormField from "@/components/form-field";
-import { categories } from "@/constants";
+import { CategoryModel } from "@/generated/prisma/models";
 import { createSuggestion } from "@/lib/suggest";
 
 const initialState = {
@@ -12,18 +12,22 @@ const initialState = {
   success: null,
 };
 
-const SuggestionForm = () => {
+type Props = {
+  categories: CategoryModel[];
+};
+
+const SuggestionForm = ({ categories }: Props) => {
   const [state, action, isPending] = useActionState(
     createSuggestion,
     initialState,
   );
-  const t = useTranslations("Suggest");
+  const t = useTranslations();
 
   return (
     <>
       {state?.success && (
         <div className="mt-8 flex items-center gap-3 rounded-md border border-amber-text-amber-400/40 bg-amber-text-amber-400/10 p-4 text-amber-400">
-          <Check className="h-5 w-5" /> {t("thankYou")}
+          <Check className="h-5 w-5" /> {t("Suggest.thankYou")}
         </div>
       )}
 
@@ -32,7 +36,7 @@ const SuggestionForm = () => {
           <p className="text-sm text-destructive">{state?.error}</p>
         )}
 
-        <FormField label={t("topic")}>
+        <FormField label={t("Suggest.topic")}>
           <input
             name="topic"
             maxLength={120}
@@ -40,19 +44,19 @@ const SuggestionForm = () => {
             className="h-11 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-ring"
           />
         </FormField>
-        <FormField label={t("category")}>
+        <FormField label={t("Suggest.category")}>
           <select
             name="category"
             className="h-11 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-ring"
           >
             {categories.map((c) => (
               <option key={c.id} value={c.id}>
-                {c.label}
+                {t(`HomePage.section${c.translationKey}Title`)}
               </option>
             ))}
           </select>
         </FormField>
-        <FormField label={t("details")}>
+        <FormField label={t("Suggest.details")}>
           <textarea
             name="details"
             maxLength={2000}
@@ -76,7 +80,7 @@ const SuggestionForm = () => {
             className="inline-flex h-11 items-center rounded-md bg-foreground px-6 text-sm font-medium text-background hover:opacity-90"
             disabled={isPending}
           >
-            {isPending ? t("pendingBtn") : t("sendBtn")}
+            {isPending ? t("Suggest.pendingBtn") : t("Suggest.sendBtn")}
           </button>
         </div>
       </form>

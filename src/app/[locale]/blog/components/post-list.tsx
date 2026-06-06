@@ -4,11 +4,11 @@ import EmptyCategory from "./empty-category";
 import PostCard from "./post-card";
 
 type Props = {
-  category?: string;
+  categoryId?: number;
 };
 
-const PostList = async ({ category }: Props) => {
-  const posts = await getPosts({ category });
+const PostList = async ({ categoryId }: Props) => {
+  const posts = await getPosts({ categoryId });
   return (
     <>
       {posts.length === 0 ? (

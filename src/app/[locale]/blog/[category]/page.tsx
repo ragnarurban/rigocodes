@@ -5,7 +5,8 @@ import { Suspense } from "react";
 
 import PostListSkeleton from "@/components/post-list-skeleton";
 import { Button } from "@/components/ui/button";
-import { categories, Category, CURRENT_CATEGORIES } from "@/constants";
+import { Category } from "@/constants";
+import { getCategory } from "@/lib/category";
 
 import PostList from "../components/post-list";
 
@@ -17,13 +18,13 @@ type Props = {
 
 const page = async ({ params }: Props) => {
   const { category } = await params;
-  const t = await getTranslations();
+  const categoryData = await getCategory(category);
 
-  if (!CURRENT_CATEGORIES.includes(category)) {
-    return notFound();
+  if (!categoryData) {
+    notFound();
   }
 
-  const pageData = categories.find((element) => element.id === category);
+  const t = await getTranslations();
 
   return (
     <section className="container-prose py-16 md:py-24">
@@ -34,16 +35,16 @@ const page = async ({ params }: Props) => {
         ← {t("Common.backBlog")}
       </Link>
       <h1 className="mt-4 font-heading text-5xl md:text-7xl font-semibold tracking-tight">
-        {t(`HomePage.section${pageData?.translationKey}Title`)}
+        {t(`HomePage.section${categoryData.translationKey}Title`)}
         <span className="text-primary">.</span>
       </h1>
       <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-        {t(`HomePage.section${pageData?.translationKey}Description`)}
+        {t(`HomePage.section${categoryData.translationKey}Description`)}
       </p>
 
       <div className="mt-12">
         <Suspense fallback={<PostListSkeleton />}>
-          <PostList category={category} />
+          <PostList categoryId={categoryData.id} />
         </Suspense>
       </div>
       <div className="mt-10 text-center">

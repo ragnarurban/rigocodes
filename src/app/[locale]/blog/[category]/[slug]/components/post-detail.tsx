@@ -10,14 +10,13 @@ import { extractHeadings } from "../lib/extract-headings";
 
 type Props = {
   locale: string;
-  category: string;
   slug: string;
 };
 
-const PostDetail = async ({ category, locale, slug }: Props) => {
+const PostDetail = async ({ locale, slug }: Props) => {
   const t = await getTranslations();
 
-  const post = await getPost({ category, slug });
+  const post = await getPost({ slug });
 
   const source = locale === "es" && post?.esBody ? post?.esBody : post?.content;
   const headings = extractHeadings(source);
@@ -38,10 +37,10 @@ const PostDetail = async ({ category, locale, slug }: Props) => {
   return (
     <>
       <Link
-        href={`/blog/${post.category}`}
+        href={`/blog/${post.category.key}`}
         className="mono text-xs uppercase tracking-widest text-primary"
       >
-        ← {post.category}
+        ← {t(`HomePage.section${post.category.translationKey}Title`)}
       </Link>
       <h1 className="mt-4 font-heading text-4xl md:text-6xl font-semibold leading-[1.05] tracking-tight text-balance">
         {locale === "es" && post.esTitle ? post.esTitle : post.title}

@@ -90,22 +90,6 @@ export const createPost = async (prevState: any, formData: FormData) => {
   const finalSlug = parsed.data.slug || slugify(parsed.data.title);
   if (!finalSlug || !title) return;
 
-  // console.log(`[suggest.ts] New posts with:`, {
-  //   slug: finalSlug,
-  //   title: parsed.data.title,
-  //   description: parsed.data.description,
-  //   category: parsed.data.category,
-  //   createdAt: parsed.data.createdAt,
-  //   readingTime: parsed.data.readingTime,
-  //   tags: parsed.data.tags.split(", "),
-  //   content: parsed.data.content,
-  //   translations: {
-  //     esTitle: parsed.data.esTitle,
-  //     esDesc: parsed.data.esDesc,
-  //     esBody: parsed.data.esBody,
-  //   },
-  // });
-
   try {
     await prisma.post.create({
       data: {
@@ -170,7 +154,7 @@ export const editPost = async (prevState: any, formData: FormData) => {
     esBody,
   });
   if (!parsed.success) {
-    console.log("ERROR ", parsed.error);
+    console.log("Error ", parsed.error);
     return {
       error: parsed.error.issues[0]?.message ?? "Invalid input",
     };
@@ -179,24 +163,8 @@ export const editPost = async (prevState: any, formData: FormData) => {
   const finalSlug = parsed.data.slug || slugify(parsed.data.title);
   if (!finalSlug || !title) return;
 
-  console.log(`[post.ts] Edit posts with:`, {
-    slug: finalSlug,
-    title: parsed.data.title,
-    description: parsed.data.description,
-    category: parsed.data.category,
-    createdAt: parsed.data.createdAt,
-    readingTime: parsed.data.readingTime,
-    tags: parsed.data.tags.split(", "),
-    content: parsed.data.content,
-    translations: {
-      esTitle: parsed.data.esTitle,
-      esDesc: parsed.data.esDesc,
-      esBody: parsed.data.esBody,
-    },
-  });
-
   try {
-    const result = await prisma.post.update({
+    await prisma.post.update({
       where: {
         id: Number(id),
       },
@@ -216,8 +184,6 @@ export const editPost = async (prevState: any, formData: FormData) => {
       },
     });
 
-    console.log(`[posts.ts] Created post ${JSON.stringify(result)}`);
-
     return {
       success: "Form submitted!",
     };
@@ -232,17 +198,26 @@ export const editPost = async (prevState: any, formData: FormData) => {
 };
 
 type PostFilter = {
-  category?: string;
+  categoryId?: number;
   slug?: string;
   id?: number;
 };
 
 export const getPosts = async (filters: PostFilter = {}) => {
   try {
-    const posts = await prisma.post.findMany({ where: filters });
+    // const where =
+    const posts = await prisma.post.findMany({
+      where: filters,
+      include: {
+        category: true, // Includes associated category info in results
+        tags: true, // Includes array of active tag relations
+      },
+    });
     return posts;
-  } catch {
+  } catch (error) {
     // error handling, for now pass
+    console.log("Error ", error);
+    return [];
   }
 };
 
@@ -250,6 +225,10 @@ export const getPost = async (filters: PostFilter = {}) => {
   try {
     const posts = await prisma.post.findFirst({
       where: filters,
+      include: {
+        category: true,
+        tags: true,
+      },
     });
     return posts;
   } catch {

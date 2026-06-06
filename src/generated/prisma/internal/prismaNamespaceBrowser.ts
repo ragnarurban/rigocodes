@@ -55,6 +55,8 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
+  Category: 'Category',
+  Tag: 'Tag',
   Post: 'Post',
   Suggestion: 'Suggestion',
   Message: 'Message'
@@ -134,6 +136,26 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  translationKey: 'translationKey',
+  active: 'active'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  translationKey: 'translationKey'
+} as const
+
+export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
+
+
 export const PostScalarFieldEnum = {
   id: 'id',
   content: 'content',
@@ -141,9 +163,8 @@ export const PostScalarFieldEnum = {
   slug: 'slug',
   title: 'title',
   description: 'description',
-  category: 'category',
+  categoryId: 'categoryId',
   readingTime: 'readingTime',
-  tags: 'tags',
   esTitle: 'esTitle',
   esDesc: 'esDesc',
   esBody: 'esBody',
@@ -157,7 +178,7 @@ export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof Post
 export const SuggestionScalarFieldEnum = {
   id: 'id',
   topic: 'topic',
-  category: 'category',
+  categoryId: 'categoryId',
   details: 'details',
   email: 'email',
   createdAt: 'createdAt'

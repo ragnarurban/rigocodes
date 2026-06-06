@@ -28,16 +28,18 @@ export type AggregateSuggestion = {
 
 export type SuggestionAvgAggregateOutputType = {
   id: number | null
+  categoryId: number | null
 }
 
 export type SuggestionSumAggregateOutputType = {
   id: number | null
+  categoryId: number | null
 }
 
 export type SuggestionMinAggregateOutputType = {
   id: number | null
   topic: string | null
-  category: string | null
+  categoryId: number | null
   details: string | null
   email: string | null
   createdAt: Date | null
@@ -46,7 +48,7 @@ export type SuggestionMinAggregateOutputType = {
 export type SuggestionMaxAggregateOutputType = {
   id: number | null
   topic: string | null
-  category: string | null
+  categoryId: number | null
   details: string | null
   email: string | null
   createdAt: Date | null
@@ -55,7 +57,7 @@ export type SuggestionMaxAggregateOutputType = {
 export type SuggestionCountAggregateOutputType = {
   id: number
   topic: number
-  category: number
+  categoryId: number
   details: number
   email: number
   createdAt: number
@@ -65,16 +67,18 @@ export type SuggestionCountAggregateOutputType = {
 
 export type SuggestionAvgAggregateInputType = {
   id?: true
+  categoryId?: true
 }
 
 export type SuggestionSumAggregateInputType = {
   id?: true
+  categoryId?: true
 }
 
 export type SuggestionMinAggregateInputType = {
   id?: true
   topic?: true
-  category?: true
+  categoryId?: true
   details?: true
   email?: true
   createdAt?: true
@@ -83,7 +87,7 @@ export type SuggestionMinAggregateInputType = {
 export type SuggestionMaxAggregateInputType = {
   id?: true
   topic?: true
-  category?: true
+  categoryId?: true
   details?: true
   email?: true
   createdAt?: true
@@ -92,7 +96,7 @@ export type SuggestionMaxAggregateInputType = {
 export type SuggestionCountAggregateInputType = {
   id?: true
   topic?: true
-  category?: true
+  categoryId?: true
   details?: true
   email?: true
   createdAt?: true
@@ -188,7 +192,7 @@ export type SuggestionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type SuggestionGroupByOutputType = {
   id: number
   topic: string
-  category: string
+  categoryId: number
   details: string
   email: string
   createdAt: Date
@@ -220,19 +224,21 @@ export type SuggestionWhereInput = {
   NOT?: Prisma.SuggestionWhereInput | Prisma.SuggestionWhereInput[]
   id?: Prisma.IntFilter<"Suggestion"> | number
   topic?: Prisma.StringFilter<"Suggestion"> | string
-  category?: Prisma.StringFilter<"Suggestion"> | string
+  categoryId?: Prisma.IntFilter<"Suggestion"> | number
   details?: Prisma.StringFilter<"Suggestion"> | string
   email?: Prisma.StringFilter<"Suggestion"> | string
   createdAt?: Prisma.DateTimeFilter<"Suggestion"> | Date | string
+  category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
 }
 
 export type SuggestionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   topic?: Prisma.SortOrder
-  category?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   details?: Prisma.SortOrder
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  category?: Prisma.CategoryOrderByWithRelationInput
 }
 
 export type SuggestionWhereUniqueInput = Prisma.AtLeast<{
@@ -241,16 +247,17 @@ export type SuggestionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SuggestionWhereInput | Prisma.SuggestionWhereInput[]
   OR?: Prisma.SuggestionWhereInput[]
   NOT?: Prisma.SuggestionWhereInput | Prisma.SuggestionWhereInput[]
-  category?: Prisma.StringFilter<"Suggestion"> | string
+  categoryId?: Prisma.IntFilter<"Suggestion"> | number
   details?: Prisma.StringFilter<"Suggestion"> | string
   email?: Prisma.StringFilter<"Suggestion"> | string
   createdAt?: Prisma.DateTimeFilter<"Suggestion"> | Date | string
+  category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
 }, "id" | "topic">
 
 export type SuggestionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   topic?: Prisma.SortOrder
-  category?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   details?: Prisma.SortOrder
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -267,7 +274,7 @@ export type SuggestionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SuggestionScalarWhereWithAggregatesInput | Prisma.SuggestionScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Suggestion"> | number
   topic?: Prisma.StringWithAggregatesFilter<"Suggestion"> | string
-  category?: Prisma.StringWithAggregatesFilter<"Suggestion"> | string
+  categoryId?: Prisma.IntWithAggregatesFilter<"Suggestion"> | number
   details?: Prisma.StringWithAggregatesFilter<"Suggestion"> | string
   email?: Prisma.StringWithAggregatesFilter<"Suggestion"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Suggestion"> | Date | string
@@ -275,16 +282,16 @@ export type SuggestionScalarWhereWithAggregatesInput = {
 
 export type SuggestionCreateInput = {
   topic: string
-  category: string
   details: string
   email: string
   createdAt?: Date | string
+  category: Prisma.CategoryCreateNestedOneWithoutSuggestionsInput
 }
 
 export type SuggestionUncheckedCreateInput = {
   id?: number
   topic: string
-  category: string
+  categoryId: number
   details: string
   email: string
   createdAt?: Date | string
@@ -292,16 +299,16 @@ export type SuggestionUncheckedCreateInput = {
 
 export type SuggestionUpdateInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.CategoryUpdateOneRequiredWithoutSuggestionsNestedInput
 }
 
 export type SuggestionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   topic?: Prisma.StringFieldUpdateOperationsInput | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   details?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -310,7 +317,7 @@ export type SuggestionUncheckedUpdateInput = {
 export type SuggestionCreateManyInput = {
   id?: number
   topic: string
-  category: string
+  categoryId: number
   details: string
   email: string
   createdAt?: Date | string
@@ -318,7 +325,6 @@ export type SuggestionCreateManyInput = {
 
 export type SuggestionUpdateManyMutationInput = {
   topic?: Prisma.StringFieldUpdateOperationsInput | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
   details?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -327,16 +333,26 @@ export type SuggestionUpdateManyMutationInput = {
 export type SuggestionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   topic?: Prisma.StringFieldUpdateOperationsInput | string
-  category?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   details?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type SuggestionListRelationFilter = {
+  every?: Prisma.SuggestionWhereInput
+  some?: Prisma.SuggestionWhereInput
+  none?: Prisma.SuggestionWhereInput
+}
+
+export type SuggestionOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type SuggestionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   topic?: Prisma.SortOrder
-  category?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   details?: Prisma.SortOrder
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -344,12 +360,13 @@ export type SuggestionCountOrderByAggregateInput = {
 
 export type SuggestionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
 }
 
 export type SuggestionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   topic?: Prisma.SortOrder
-  category?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   details?: Prisma.SortOrder
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -358,7 +375,7 @@ export type SuggestionMaxOrderByAggregateInput = {
 export type SuggestionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   topic?: Prisma.SortOrder
-  category?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   details?: Prisma.SortOrder
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -366,6 +383,133 @@ export type SuggestionMinOrderByAggregateInput = {
 
 export type SuggestionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
+}
+
+export type SuggestionCreateNestedManyWithoutCategoryInput = {
+  create?: Prisma.XOR<Prisma.SuggestionCreateWithoutCategoryInput, Prisma.SuggestionUncheckedCreateWithoutCategoryInput> | Prisma.SuggestionCreateWithoutCategoryInput[] | Prisma.SuggestionUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.SuggestionCreateOrConnectWithoutCategoryInput | Prisma.SuggestionCreateOrConnectWithoutCategoryInput[]
+  createMany?: Prisma.SuggestionCreateManyCategoryInputEnvelope
+  connect?: Prisma.SuggestionWhereUniqueInput | Prisma.SuggestionWhereUniqueInput[]
+}
+
+export type SuggestionUncheckedCreateNestedManyWithoutCategoryInput = {
+  create?: Prisma.XOR<Prisma.SuggestionCreateWithoutCategoryInput, Prisma.SuggestionUncheckedCreateWithoutCategoryInput> | Prisma.SuggestionCreateWithoutCategoryInput[] | Prisma.SuggestionUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.SuggestionCreateOrConnectWithoutCategoryInput | Prisma.SuggestionCreateOrConnectWithoutCategoryInput[]
+  createMany?: Prisma.SuggestionCreateManyCategoryInputEnvelope
+  connect?: Prisma.SuggestionWhereUniqueInput | Prisma.SuggestionWhereUniqueInput[]
+}
+
+export type SuggestionUpdateManyWithoutCategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.SuggestionCreateWithoutCategoryInput, Prisma.SuggestionUncheckedCreateWithoutCategoryInput> | Prisma.SuggestionCreateWithoutCategoryInput[] | Prisma.SuggestionUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.SuggestionCreateOrConnectWithoutCategoryInput | Prisma.SuggestionCreateOrConnectWithoutCategoryInput[]
+  upsert?: Prisma.SuggestionUpsertWithWhereUniqueWithoutCategoryInput | Prisma.SuggestionUpsertWithWhereUniqueWithoutCategoryInput[]
+  createMany?: Prisma.SuggestionCreateManyCategoryInputEnvelope
+  set?: Prisma.SuggestionWhereUniqueInput | Prisma.SuggestionWhereUniqueInput[]
+  disconnect?: Prisma.SuggestionWhereUniqueInput | Prisma.SuggestionWhereUniqueInput[]
+  delete?: Prisma.SuggestionWhereUniqueInput | Prisma.SuggestionWhereUniqueInput[]
+  connect?: Prisma.SuggestionWhereUniqueInput | Prisma.SuggestionWhereUniqueInput[]
+  update?: Prisma.SuggestionUpdateWithWhereUniqueWithoutCategoryInput | Prisma.SuggestionUpdateWithWhereUniqueWithoutCategoryInput[]
+  updateMany?: Prisma.SuggestionUpdateManyWithWhereWithoutCategoryInput | Prisma.SuggestionUpdateManyWithWhereWithoutCategoryInput[]
+  deleteMany?: Prisma.SuggestionScalarWhereInput | Prisma.SuggestionScalarWhereInput[]
+}
+
+export type SuggestionUncheckedUpdateManyWithoutCategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.SuggestionCreateWithoutCategoryInput, Prisma.SuggestionUncheckedCreateWithoutCategoryInput> | Prisma.SuggestionCreateWithoutCategoryInput[] | Prisma.SuggestionUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.SuggestionCreateOrConnectWithoutCategoryInput | Prisma.SuggestionCreateOrConnectWithoutCategoryInput[]
+  upsert?: Prisma.SuggestionUpsertWithWhereUniqueWithoutCategoryInput | Prisma.SuggestionUpsertWithWhereUniqueWithoutCategoryInput[]
+  createMany?: Prisma.SuggestionCreateManyCategoryInputEnvelope
+  set?: Prisma.SuggestionWhereUniqueInput | Prisma.SuggestionWhereUniqueInput[]
+  disconnect?: Prisma.SuggestionWhereUniqueInput | Prisma.SuggestionWhereUniqueInput[]
+  delete?: Prisma.SuggestionWhereUniqueInput | Prisma.SuggestionWhereUniqueInput[]
+  connect?: Prisma.SuggestionWhereUniqueInput | Prisma.SuggestionWhereUniqueInput[]
+  update?: Prisma.SuggestionUpdateWithWhereUniqueWithoutCategoryInput | Prisma.SuggestionUpdateWithWhereUniqueWithoutCategoryInput[]
+  updateMany?: Prisma.SuggestionUpdateManyWithWhereWithoutCategoryInput | Prisma.SuggestionUpdateManyWithWhereWithoutCategoryInput[]
+  deleteMany?: Prisma.SuggestionScalarWhereInput | Prisma.SuggestionScalarWhereInput[]
+}
+
+export type SuggestionCreateWithoutCategoryInput = {
+  topic: string
+  details: string
+  email: string
+  createdAt?: Date | string
+}
+
+export type SuggestionUncheckedCreateWithoutCategoryInput = {
+  id?: number
+  topic: string
+  details: string
+  email: string
+  createdAt?: Date | string
+}
+
+export type SuggestionCreateOrConnectWithoutCategoryInput = {
+  where: Prisma.SuggestionWhereUniqueInput
+  create: Prisma.XOR<Prisma.SuggestionCreateWithoutCategoryInput, Prisma.SuggestionUncheckedCreateWithoutCategoryInput>
+}
+
+export type SuggestionCreateManyCategoryInputEnvelope = {
+  data: Prisma.SuggestionCreateManyCategoryInput | Prisma.SuggestionCreateManyCategoryInput[]
+  skipDuplicates?: boolean
+}
+
+export type SuggestionUpsertWithWhereUniqueWithoutCategoryInput = {
+  where: Prisma.SuggestionWhereUniqueInput
+  update: Prisma.XOR<Prisma.SuggestionUpdateWithoutCategoryInput, Prisma.SuggestionUncheckedUpdateWithoutCategoryInput>
+  create: Prisma.XOR<Prisma.SuggestionCreateWithoutCategoryInput, Prisma.SuggestionUncheckedCreateWithoutCategoryInput>
+}
+
+export type SuggestionUpdateWithWhereUniqueWithoutCategoryInput = {
+  where: Prisma.SuggestionWhereUniqueInput
+  data: Prisma.XOR<Prisma.SuggestionUpdateWithoutCategoryInput, Prisma.SuggestionUncheckedUpdateWithoutCategoryInput>
+}
+
+export type SuggestionUpdateManyWithWhereWithoutCategoryInput = {
+  where: Prisma.SuggestionScalarWhereInput
+  data: Prisma.XOR<Prisma.SuggestionUpdateManyMutationInput, Prisma.SuggestionUncheckedUpdateManyWithoutCategoryInput>
+}
+
+export type SuggestionScalarWhereInput = {
+  AND?: Prisma.SuggestionScalarWhereInput | Prisma.SuggestionScalarWhereInput[]
+  OR?: Prisma.SuggestionScalarWhereInput[]
+  NOT?: Prisma.SuggestionScalarWhereInput | Prisma.SuggestionScalarWhereInput[]
+  id?: Prisma.IntFilter<"Suggestion"> | number
+  topic?: Prisma.StringFilter<"Suggestion"> | string
+  categoryId?: Prisma.IntFilter<"Suggestion"> | number
+  details?: Prisma.StringFilter<"Suggestion"> | string
+  email?: Prisma.StringFilter<"Suggestion"> | string
+  createdAt?: Prisma.DateTimeFilter<"Suggestion"> | Date | string
+}
+
+export type SuggestionCreateManyCategoryInput = {
+  id?: number
+  topic: string
+  details: string
+  email: string
+  createdAt?: Date | string
+}
+
+export type SuggestionUpdateWithoutCategoryInput = {
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SuggestionUncheckedUpdateWithoutCategoryInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SuggestionUncheckedUpdateManyWithoutCategoryInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  topic?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -373,48 +517,62 @@ export type SuggestionSumOrderByAggregateInput = {
 export type SuggestionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   topic?: boolean
-  category?: boolean
+  categoryId?: boolean
   details?: boolean
   email?: boolean
   createdAt?: boolean
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["suggestion"]>
 
 export type SuggestionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   topic?: boolean
-  category?: boolean
+  categoryId?: boolean
   details?: boolean
   email?: boolean
   createdAt?: boolean
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["suggestion"]>
 
 export type SuggestionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   topic?: boolean
-  category?: boolean
+  categoryId?: boolean
   details?: boolean
   email?: boolean
   createdAt?: boolean
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["suggestion"]>
 
 export type SuggestionSelectScalar = {
   id?: boolean
   topic?: boolean
-  category?: boolean
+  categoryId?: boolean
   details?: boolean
   email?: boolean
   createdAt?: boolean
 }
 
-export type SuggestionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "topic" | "category" | "details" | "email" | "createdAt", ExtArgs["result"]["suggestion"]>
+export type SuggestionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "topic" | "categoryId" | "details" | "email" | "createdAt", ExtArgs["result"]["suggestion"]>
+export type SuggestionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+}
+export type SuggestionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+}
+export type SuggestionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+}
 
 export type $SuggestionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Suggestion"
-  objects: {}
+  objects: {
+    category: Prisma.$CategoryPayload<ExtArgs>
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     topic: string
-    category: string
+    categoryId: number
     details: string
     email: string
     createdAt: Date
@@ -812,6 +970,7 @@ readonly fields: SuggestionFieldRefs;
  */
 export interface Prisma__SuggestionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -843,7 +1002,7 @@ export interface Prisma__SuggestionClient<T, Null = never, ExtArgs extends runti
 export interface SuggestionFieldRefs {
   readonly id: Prisma.FieldRef<"Suggestion", 'Int'>
   readonly topic: Prisma.FieldRef<"Suggestion", 'String'>
-  readonly category: Prisma.FieldRef<"Suggestion", 'String'>
+  readonly categoryId: Prisma.FieldRef<"Suggestion", 'Int'>
   readonly details: Prisma.FieldRef<"Suggestion", 'String'>
   readonly email: Prisma.FieldRef<"Suggestion", 'String'>
   readonly createdAt: Prisma.FieldRef<"Suggestion", 'DateTime'>
@@ -864,6 +1023,10 @@ export type SuggestionFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.SuggestionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionInclude<ExtArgs> | null
+  /**
    * Filter, which Suggestion to fetch.
    */
   where: Prisma.SuggestionWhereUniqueInput
@@ -882,6 +1045,10 @@ export type SuggestionFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.SuggestionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionInclude<ExtArgs> | null
+  /**
    * Filter, which Suggestion to fetch.
    */
   where: Prisma.SuggestionWhereUniqueInput
@@ -899,6 +1066,10 @@ export type SuggestionFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the Suggestion
    */
   omit?: Prisma.SuggestionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionInclude<ExtArgs> | null
   /**
    * Filter, which Suggestion to fetch.
    */
@@ -948,6 +1119,10 @@ export type SuggestionFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensi
    */
   omit?: Prisma.SuggestionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionInclude<ExtArgs> | null
+  /**
    * Filter, which Suggestion to fetch.
    */
   where?: Prisma.SuggestionWhereInput
@@ -995,6 +1170,10 @@ export type SuggestionFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the Suggestion
    */
   omit?: Prisma.SuggestionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionInclude<ExtArgs> | null
   /**
    * Filter, which Suggestions to fetch.
    */
@@ -1044,6 +1223,10 @@ export type SuggestionCreateArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.SuggestionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionInclude<ExtArgs> | null
+  /**
    * The data needed to create a Suggestion.
    */
   data: Prisma.XOR<Prisma.SuggestionCreateInput, Prisma.SuggestionUncheckedCreateInput>
@@ -1077,6 +1260,10 @@ export type SuggestionCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    */
   data: Prisma.SuggestionCreateManyInput | Prisma.SuggestionCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1091,6 +1278,10 @@ export type SuggestionUpdateArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Suggestion
    */
   omit?: Prisma.SuggestionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionInclude<ExtArgs> | null
   /**
    * The data needed to update a Suggestion.
    */
@@ -1143,6 +1334,10 @@ export type SuggestionUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * Limit how many Suggestions to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1157,6 +1352,10 @@ export type SuggestionUpsertArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Suggestion
    */
   omit?: Prisma.SuggestionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionInclude<ExtArgs> | null
   /**
    * The filter to search for the Suggestion to update in case it exists.
    */
@@ -1183,6 +1382,10 @@ export type SuggestionDeleteArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Suggestion
    */
   omit?: Prisma.SuggestionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionInclude<ExtArgs> | null
   /**
    * Filter which Suggestion to delete.
    */
@@ -1215,4 +1418,8 @@ export type SuggestionDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Suggestion
    */
   omit?: Prisma.SuggestionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuggestionInclude<ExtArgs> | null
 }
