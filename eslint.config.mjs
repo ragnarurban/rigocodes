@@ -13,6 +13,9 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     "public/",
+    ".agents/**",
+    ".open-next/**",
+    "src/generated/**",
   ]),
   {
     rules: {

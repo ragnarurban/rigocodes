@@ -7,7 +7,7 @@ import prisma from "./prisma";
 
 const schema = z.object({
   topic: z.string().trim().min(3).max(120),
-  category: z.number().min(2).max(4),
+  category: z.coerce.number().int().positive(),
   details: z
     .string()
     .trim()
@@ -58,7 +58,9 @@ export const createSuggestion = async (prevState: any, formData: FormData) => {
 };
 
 export const getSuggestions = async () => {
-  const suggestions = await prisma.suggestion.findMany();
+  const suggestions = await prisma.suggestion.findMany({
+    include: { category: true },
+  });
   return suggestions;
 };
 

@@ -9,7 +9,7 @@ import prisma from "./prisma";
 const schema = z.object({
   title: z.string().trim().min(3).max(120),
   slug: z.string().trim().min(3).max(120),
-  category: z.enum(["web-development", "game-development", "showcase"]),
+  category: z.string().trim().min(1),
   description: z
     .string()
     .trim()
@@ -43,6 +43,10 @@ const schema = z.object({
     })
     .max(9000),
 });
+
+function parseTags(s: string) {
+  return [...new Set(s.split(",").map((t) => t.trim()).filter(Boolean))];
+}
 
 function slugify(s: string) {
   return s
@@ -96,11 +100,16 @@ export const createPost = async (prevState: any, formData: FormData) => {
         title: parsed.data.title,
         slug: parsed.data.slug,
         description: parsed.data.description,
-        category: parsed.data.category,
+        category: { connect: { key: parsed.data.category } },
         content: parsed.data.content,
         createdAt: parsed.data.createdAt,
         readingTime: parsed.data.readingTime,
-        tags: parsed.data.tags.split(", "),
+        tags: {
+          connectOrCreate: parseTags(parsed.data.tags).map((name) => ({
+            where: { name },
+            create: { name, translationKey: name },
+          })),
+        },
 
         esTitle: parsed.data.esTitle,
         esDesc: parsed.data.esDesc,
@@ -172,11 +181,17 @@ export const editPost = async (prevState: any, formData: FormData) => {
         title: parsed.data.title,
         slug: parsed.data.slug,
         description: parsed.data.description,
-        category: parsed.data.category,
+        category: { connect: { key: parsed.data.category } },
         content: parsed.data.content,
         createdAt: parsed.data.createdAt,
         readingTime: parsed.data.readingTime,
-        tags: parsed.data.tags.split(", "),
+        tags: {
+          set: [],
+          connectOrCreate: parseTags(parsed.data.tags).map((name) => ({
+            where: { name },
+            create: { name, translationKey: name },
+          })),
+        },
 
         esTitle: parsed.data.esTitle,
         esDesc: parsed.data.esDesc,

@@ -9,12 +9,12 @@ type Props = {
 };
 
 const Page = async ({ params }: Props) => {
-  const { locale, category, slug } = await params;
+  const { locale, slug } = await params;
 
   return (
     <article className="container-narrow py-16">
       <Suspense fallback={<PostListSkeleton />}>
-        <PostDetail category={category} slug={slug} locale={locale} />
+        <PostDetail slug={slug} locale={locale} />
       </Suspense>
     </article>
   );
