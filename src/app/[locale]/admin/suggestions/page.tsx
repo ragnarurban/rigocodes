@@ -14,7 +14,7 @@ const Page = async () => {
             <div>
               <div className="font-medium">{sugg.topic}</div>
               <div className="mono text-xs text-muted-foreground">
-                {sugg.category} · {new Date(sugg.createdAt).toLocaleString()}{" "}
+                {sugg.category.name} · {new Date(sugg.createdAt).toLocaleString()}{" "}
                 {sugg.email && `· ${sugg.email}`}
               </div>
             </div>

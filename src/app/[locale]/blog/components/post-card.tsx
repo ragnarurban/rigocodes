@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import { PostModel } from "@/generated/prisma/models";
+import type { getPosts } from "@/lib/post";
 
 type Props = {
-  post: PostModel;
+  post: Awaited<ReturnType<typeof getPosts>>[number];
   featured?: boolean;
 };
 

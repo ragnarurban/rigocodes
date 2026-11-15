@@ -60,7 +60,7 @@ const PostEditorForm = ({ initialPost, action, isEdit }: Props) => {
               <select
                 name="category"
                 className="h-11 w-full rounded-md border border-border bg-background px-3 text-sm"
-                defaultValue={initialPost?.categoryId || initialPost?.category}
+                defaultValue={initialPost?.category?.key}
               >
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -88,7 +88,9 @@ const PostEditorForm = ({ initialPost, action, isEdit }: Props) => {
           <Input
             label="Tags (comma separated)"
             name="tags"
-            defaultValue={initialPost?.tags}
+            defaultValue={initialPost?.tags
+              ?.map((tag: { name: string }) => tag.name)
+              .join(", ")}
           />
           <label className="block">
             <span className="mono mb-2 block text-xs uppercase tracking-widest text-muted-foreground">
