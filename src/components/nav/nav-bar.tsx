@@ -1,10 +1,10 @@
 import { getCategories } from "@/lib/category";
 
+import LangPicker from "../lang-picker";
 import SideMenu from "../sidemenu";
 import { ModeToggle } from "../themetoggle";
 import Logo from "./logo";
 import SiteNav from "./site-nav";
-import LangPicker from "../lang-picker";
 
 const Navbar = async () => {
   const categories = await getCategories();

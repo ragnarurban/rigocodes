@@ -2,7 +2,7 @@
 import { auth } from "./auth";
 import "dotenv/config";
 
-export const adminLogin = async (prevState: any, formData: FormData) => {
+export const adminLogin = async (_prevState: any, formData: FormData) => {
   const { password } = Object.fromEntries(formData);
 
   try {

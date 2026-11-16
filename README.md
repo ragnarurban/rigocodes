@@ -1,11 +1,12 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Skills
+
 Using vercels skills, to install run
+
 ```bash
 npx skills add vercel-labs/agent-skills  
 ```
-
 
 ## Getting Started
 

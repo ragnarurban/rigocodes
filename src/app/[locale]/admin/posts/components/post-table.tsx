@@ -25,7 +25,9 @@ const PostTable = async () => {
                   {p.slug}
                 </div>
               </td>
-              <td className="px-4 py-3 text-muted-foreground">{p.category.name}</td>
+              <td className="px-4 py-3 text-muted-foreground">
+                {p.category.name}
+              </td>
               <td className="px-4 py-3 mono text-xs text-muted-foreground">
                 {p.createdAt.toLocaleDateString()}
               </td>

@@ -1,6 +1,6 @@
 import { Eye, Heart, Inbox, Share2 } from "lucide-react";
 
-import { posts, messages, suggestions } from "@/constants";
+import { messages, posts, suggestions } from "@/constants";
 
 import Stat from "../components/stat";
 

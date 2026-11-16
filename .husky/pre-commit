@@ -1,0 +1,25 @@
+# Staged files that still exist (added, copied, modified, renamed).
+staged_ts=$(git diff --cached --name-only --diff-filter=ACMR -- '*.ts' '*.tsx' '*.mts')
+
+echo "▶ Biome lint (staged files)"
+pnpm exec biome lint --staged --no-errors-on-unmatched || exit 1
+
+echo "▶ Biome format check (staged files)"
+pnpm exec biome format --staged --no-errors-on-unmatched || exit 1
+
+echo "▶ TypeScript type check"
+pnpm exec tsc --noEmit || exit 1
+
+if [ -n "$staged_ts" ]; then
+  echo "▶ Unit tests related to staged files"
+  # One path per line; read into positional args so paths like [locale] survive.
+  set --
+  while IFS= read -r file; do
+    set -- "$@" "$file"
+  done <<EOF
+$staged_ts
+EOF
+  pnpm exec vitest related --run --passWithNoTests "$@" || exit 1
+else
+  echo "▶ No staged TypeScript files, skipping tests"
+fi

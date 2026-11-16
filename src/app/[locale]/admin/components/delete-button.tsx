@@ -10,6 +10,7 @@ type Props = {
 const DeleteBtn = ({ id, callback }: Props) => {
   return (
     <button
+      type="button"
       onClick={async () => await callback(id)}
       className="text-muted-foreground hover:text-destructive"
     >

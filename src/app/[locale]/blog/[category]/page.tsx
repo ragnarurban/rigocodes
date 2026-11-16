@@ -5,10 +5,11 @@ import { Suspense } from "react";
 
 import PostListSkeleton from "@/components/post-list-skeleton";
 import { Button } from "@/components/ui/button";
-import { Category } from "@/constants";
 import { getCategory } from "@/lib/category";
 
 import PostList from "../components/post-list";
+
+import type { Category } from "@/constants";
 
 type Props = {
   params: {

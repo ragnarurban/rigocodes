@@ -215,6 +215,7 @@ export const suggestions: Suggestion[] = [
       "You bro I really love your site and I would love to see some more content and feet pics",
   },
 ];
+
 import { BarChart3, FileText, Inbox, Lightbulb } from "lucide-react";
 
 export const TABS = [

@@ -8,6 +8,7 @@ import { authClient } from "@/lib/auth-client";
 const LogoutBtn = () => {
   return (
     <button
+      type="button"
       onClick={async () =>
         authClient.signOut({
           fetchOptions: {
