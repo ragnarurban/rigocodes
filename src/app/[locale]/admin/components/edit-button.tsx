@@ -9,6 +9,7 @@ type Props = {
 const EditBtn = ({ id, callback }: Props) => {
   return (
     <button
+      type="button"
       onClick={() => callback(id)}
       className="mr-1 inline-flex h-8 items-center gap-1 rounded-md border border-border px-2 text-xs hover:border-accent"
     >

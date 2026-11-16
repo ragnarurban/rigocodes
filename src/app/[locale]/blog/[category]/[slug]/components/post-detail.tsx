@@ -65,7 +65,8 @@ const PostDetail = async ({ locale, slug }: Props) => {
           <ol className="mt-3 space-y-2">
             {headings.map((heading, index) => (
               <li
-                key={index}
+                // biome-ignore lint/suspicious/noArrayIndexKey: heading ids can repeat, index keeps keys unique
+                key={`${heading.id}-${index}`}
                 style={{ paddingLeft: `${(heading.level - 1) * 16}px` }}
               >
                 <Link

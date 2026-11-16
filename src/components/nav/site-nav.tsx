@@ -3,9 +3,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { CategoryModel } from "@/generated/prisma/models";
-
 import UnderlineButton from "./underline-button";
+
+import type { CategoryModel } from "@/generated/prisma/models";
 
 type Props = {
   categories: CategoryModel[];

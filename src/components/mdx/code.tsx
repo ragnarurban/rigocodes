@@ -1,8 +1,7 @@
 "use client";
-import React, { useRef, useState } from "react";
+import { type ComponentProps, useRef, useState } from "react";
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-const Code = (props: any) => {
+const Code = (props: ComponentProps<"code">) => {
   const [copied, setCopied] = useState(false);
   const codeRef = useRef<HTMLElement>(null);
 
@@ -14,7 +13,7 @@ const Code = (props: any) => {
   // Handle copy functionality
   const handleCopy = () => {
     if (codeRef.current) {
-      const codeText = codeRef.current.innerText;
+      const codeText = codeRef.current.textContent ?? "";
       navigator.clipboard.writeText(codeText).then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds

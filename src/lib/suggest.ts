@@ -1,9 +1,10 @@
 "use server";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import { revalidatePath } from "next/cache";
 import * as z from "zod";
 
 import prisma from "./prisma";
+
+import type { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 const schema = z.object({
   topic: z.string().trim().min(3).max(120),
@@ -22,7 +23,7 @@ const schema = z.object({
     .max(255),
 });
 
-export const createSuggestion = async (prevState: any, formData: FormData) => {
+export const createSuggestion = async (_prevState: any, formData: FormData) => {
   const { topic, category, details, email } = Object.fromEntries(formData);
 
   const parsed = schema.safeParse({ topic, category, details, email });

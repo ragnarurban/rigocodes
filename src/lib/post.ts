@@ -1,10 +1,11 @@
 "use server";
 
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import { revalidatePath } from "next/cache";
 import * as z from "zod";
 
 import prisma from "./prisma";
+
+import type { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 const schema = z.object({
   title: z.string().trim().min(3).max(120),
@@ -45,7 +46,14 @@ const schema = z.object({
 });
 
 function parseTags(s: string) {
-  return [...new Set(s.split(",").map((t) => t.trim()).filter(Boolean))];
+  return [
+    ...new Set(
+      s
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean),
+    ),
+  ];
 }
 
 function slugify(s: string) {
@@ -57,7 +65,7 @@ function slugify(s: string) {
     .slice(0, 80);
 }
 
-export const createPost = async (prevState: any, formData: FormData) => {
+export const createPost = async (_prevState: any, formData: FormData) => {
   const {
     slug,
     title,
@@ -128,7 +136,7 @@ export const createPost = async (prevState: any, formData: FormData) => {
   }
 };
 
-export const editPost = async (prevState: any, formData: FormData) => {
+export const editPost = async (_prevState: any, formData: FormData) => {
   const id = formData.get("id");
 
   if (!id) {

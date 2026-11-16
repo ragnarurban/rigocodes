@@ -11,9 +11,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { CategoryModel } from "@/generated/prisma/models";
 
 import Logo from "./nav/logo";
+
+import type { CategoryModel } from "@/generated/prisma/models";
 
 type Props = {
   categories: CategoryModel[];

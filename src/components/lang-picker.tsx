@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useLocale } from "next-intl";
 import { useTransition } from "react";
 
-import { useRouter, usePathname } from "@/navigation";
+import { usePathname, useRouter } from "@/navigation";
 
 import { Button } from "./ui/button";
 

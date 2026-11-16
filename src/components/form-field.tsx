@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 type Props = {
   label: string;
@@ -7,6 +7,7 @@ type Props = {
 
 const FormField = ({ label, children }: Props) => {
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: the control is passed in as children
     <label className="block">
       <span className="mono mb-2 block text-xs uppercase tracking-widest text-muted-foreground">
         {label}

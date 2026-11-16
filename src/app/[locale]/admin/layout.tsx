@@ -1,10 +1,11 @@
-import { ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { TABS } from "@/constants";
 
 import LogoutBtn from "./components/logout-btn";
 import { TabBtn } from "./components/tab-button";
+
+import type { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;

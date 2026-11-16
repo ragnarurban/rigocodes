@@ -4,8 +4,9 @@ import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 
 import FormField from "@/components/form-field";
-import { CategoryModel } from "@/generated/prisma/models";
 import { createSuggestion } from "@/lib/suggest";
+
+import type { CategoryModel } from "@/generated/prisma/models";
 
 const initialState = {
   error: null,

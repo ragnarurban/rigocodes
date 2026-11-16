@@ -30,6 +30,7 @@ const Page = () => {
           <input
             type="password"
             name="password"
+            // biome-ignore lint/a11y/noAutofocus: single-field admin login, focus is expected
             autoFocus
             placeholder="password"
             className="h-11 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-ring"
