@@ -51,7 +51,7 @@ CI (`.github/workflows/ci.yml`) runs these jobs on every PR: lint, format, types
 
 **Data layer.** `src/lib/*.ts` modules are `"use server"` files. They hold both the read queries (`getPosts`, `getPost`, `getCategories`, and so on) and the server actions used with `useActionState` (`createPost(prevState, formData)`, etc.). Actions validate `FormData` with zod, write through Prisma, call `revalidatePath`, and return `{ success }` or `{ error }` objects rather than throwing. `src/lib/prisma.ts` is the singleton client, using the `@prisma/adapter-pg` driver adapter.
 
-**Prisma client location.** The generator outputs to `src/generated/prisma` (import from `@/generated/prisma/client`, not `@prisma/client`). This directory is committed and ESLint ignores it. Regenerate it after any change to `prisma/schema.prisma`.
+**Prisma client location.** The generator outputs to `src/generated/prisma` (import from `@/generated/prisma/client`, not `@prisma/client`). This directory is gitignored and Biome skips it. It is generated in two places: by `postinstall` on a fresh install, and by `pnpm build` (`prisma generate && next build`). The `build` step is needed because pnpm skips `postinstall` when `node_modules` is already up to date, for example when Vercel restores its build cache. Run `pnpm prisma generate` after any change to `prisma/schema.prisma`.
 
 **Bilingual content.** A `Post` stores English in `title`/`description`/`content` and Spanish in `esTitle`/`esDesc`/`esBody`. Pages pick the field based on `locale`, falling back to English. Categories and tags carry a `translationKey` that maps to message keys (for example `HomePage.section${translationKey}Title`).
 
