@@ -29,7 +29,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
-    "dotenv": "^17.4.2",
+    "dotenv": "^18.0.10",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.73.0",
     "next": "16.4.6",
