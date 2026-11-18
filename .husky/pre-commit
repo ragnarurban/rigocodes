@@ -19,7 +19,7 @@ if [ -n "$staged_ts" ]; then
   done <<EOF
 $staged_ts
 EOF
-  pnpm exec vitest related --run --passWithNoTests "$@" || exit 1
+  pnpm exec vitest related --run --project unit --passWithNoTests "$@" || exit 1
 else
   echo "▶ No staged TypeScript files, skipping tests"
 fi

@@ -42,3 +42,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Integration tests
+
+To run the integration tests yourself, start Docker Desktop and run:
+
+```bash
+docker run -d --name rigocodes-test-db -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=rigocodes_test -p 5432:5432 postgres:17
+export TEST_DATABASE_URL=postgresql://postgres:postgres@localhost:5432/rigocodes_test
+DATABASE_URL=$TEST_DATABASE_URL pnpm prisma migrate deploy
+pnpm test:integration
+```
