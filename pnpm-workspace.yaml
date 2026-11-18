@@ -7,3 +7,11 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
   workerd: true
+
+auditConfig:
+  ignoreGhsas:
+    # picomatch ReDoS (high): no patched version exists yet (<=4.0.7 affected).
+    # Only reachable through build/dev tooling (next-intl's @parcel/watcher,
+    # vitest as better-auth's optional peer) with fixed glob patterns, never
+    # user input. Remove this entry once picomatch ships a fix.
+    - GHSA-fc5q-39xc-vjpf

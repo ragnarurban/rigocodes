@@ -15,16 +15,31 @@ pnpm lint         # Biome: lint + format check + import order (biome.json)
 pnpm lint:fix     # Biome with safe fixes applied (formats and sorts imports too)
 pnpm format       # Biome formatter only
 pnpm typecheck    # tsc --noEmit
-pnpm test         # Vitest, single run
-pnpm test -- src/path/to/file.test.ts   # run one test file
+pnpm test         # Vitest, all projects (integration needs TEST_DATABASE_URL)
+pnpm test:unit    # unit tests only
+pnpm test:integration                   # integration tests against TEST_DATABASE_URL
+pnpm test:unit -- src/path/to/file.test.ts   # run one test file
 
 pnpm prisma migrate dev --name <name>   # create and apply a migration
 pnpm prisma generate                    # regenerate the client into src/generated/prisma
 ```
 
-Tests use Vitest (`vitest.config.mts`, node environment, `@/` alias). They live next to the code as `*.test.ts(x)` under `src/`.
+Tests use Vitest (`vitest.config.mts`, node environment, `@/` alias) and live next to the code under `src/`. The config defines two projects:
 
-A Husky pre-commit hook (`.husky/pre-commit`, installed by the `prepare` script) runs these steps on staged files, and any failure blocks the commit: `biome lint --staged`, then `biome format --staged`, then a full `tsc --noEmit`, then `vitest related` for the staged TS files.
+- **unit**: `*.test.ts(x)` files, with no database.
+- **integration**: `*.int.test.ts(x)` files, run against a real Postgres at `TEST_DATABASE_URL`.
+
+How the integration project protects real data:
+
+- `src/test/integration/db.ts` refuses to run unless `TEST_DATABASE_URL` is set and names a database ending in `_test`. This matters because the `.env` `DATABASE_URL` is a hosted database.
+- The project overrides `DATABASE_URL` with `TEST_DATABASE_URL`, so `src/lib/*` code under test also uses the test database.
+- The setup file (`src/test/integration/setup.ts`) truncates every table before each test and mocks `next/cache`.
+- Seed data through `testDb` from `@/test/integration/db`.
+- Before running the tests, apply migrations with `DATABASE_URL=$TEST_DATABASE_URL pnpm prisma migrate deploy`.
+
+A Husky pre-commit hook (`.husky/pre-commit`, installed by the `prepare` script) runs these steps on staged files, and any failure blocks the commit: `biome lint --staged`, then `biome format --staged`, then a full `tsc --noEmit`, then `vitest related --project unit` for the staged TS files.
+
+CI (`.github/workflows/ci.yml`) runs these jobs on every PR: lint, format, types and unit tests; integration tests against a Postgres service; `next build`; and `pnpm audit --prod --audit-level=high`. `pnpm-workspace.yaml` → `auditConfig.ignoreGhsas` lists advisories that have been reviewed and accepted, each with the reason.
 
 `DATABASE_URL` (Postgres) and `ADMIN_EMAIL` must be set in `.env`. `prisma.config.ts` loads it through `dotenv`.
 
@@ -36,7 +51,7 @@ A Husky pre-commit hook (`.husky/pre-commit`, installed by the `prepare` script)
 
 **Data layer.** `src/lib/*.ts` modules are `"use server"` files. They hold both the read queries (`getPosts`, `getPost`, `getCategories`, and so on) and the server actions used with `useActionState` (`createPost(prevState, formData)`, etc.). Actions validate `FormData` with zod, write through Prisma, call `revalidatePath`, and return `{ success }` or `{ error }` objects rather than throwing. `src/lib/prisma.ts` is the singleton client, using the `@prisma/adapter-pg` driver adapter.
 
-**Prisma client location.** The generator outputs to `src/generated/prisma` (import from `@/generated/prisma/client`, not `@prisma/client`). This directory is committed and ESLint ignores it. Regenerate it after any change to `prisma/schema.prisma`.
+**Prisma client location.** The generator outputs to `src/generated/prisma` (import from `@/generated/prisma/client`, not `@prisma/client`). This directory is gitignored and Biome skips it. It is generated in two places: by `postinstall` on a fresh install, and by `pnpm build` (`prisma generate && next build`). The `build` step is needed because pnpm skips `postinstall` when `node_modules` is already up to date, for example when Vercel restores its build cache. Run `pnpm prisma generate` after any change to `prisma/schema.prisma`.
 
 **Bilingual content.** A `Post` stores English in `title`/`description`/`content` and Spanish in `esTitle`/`esDesc`/`esBody`. Pages pick the field based on `locale`, falling back to English. Categories and tags carry a `translationKey` that maps to message keys (for example `HomePage.section${translationKey}Title`).
 
