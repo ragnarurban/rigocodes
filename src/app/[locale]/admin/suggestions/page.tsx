@@ -1,4 +1,5 @@
-import { deleteSuggestion, getSuggestions } from "@/lib/suggest";
+import { deleteSuggestion } from "@/lib/suggest";
+import { getSuggestions } from "@/lib/suggest-queries";
 
 import DeleteBtn from "../components/delete-button";
 import Empty from "../components/empty";

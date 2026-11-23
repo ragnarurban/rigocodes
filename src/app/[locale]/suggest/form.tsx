@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 
 import FormField from "@/components/form-field";
+import SpamTrap from "@/components/spam-trap";
 import { createSuggestion } from "@/lib/suggest";
 
 import type { CategoryModel } from "@/generated/prisma/models";
@@ -32,7 +33,8 @@ const SuggestionForm = ({ categories }: Props) => {
         </div>
       )}
 
-      <form action={action} className="mt-10 space-y-6">
+      <form action={action} className="relative mt-10 space-y-6">
+        <SpamTrap />
         {state?.error && (
           <p className="text-sm text-destructive">{state?.error}</p>
         )}

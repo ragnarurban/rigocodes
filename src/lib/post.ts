@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import * as z from "zod";
 
 import prisma from "./prisma";
+import { requireAdmin } from "./require-admin";
 
 import type { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
@@ -66,6 +67,8 @@ function slugify(s: string) {
 }
 
 export const createPost = async (_prevState: any, formData: FormData) => {
+  await requireAdmin();
+
   const {
     slug,
     title,
@@ -137,6 +140,8 @@ export const createPost = async (_prevState: any, formData: FormData) => {
 };
 
 export const editPost = async (_prevState: any, formData: FormData) => {
+  await requireAdmin();
+
   const id = formData.get("id");
 
   if (!id) {
@@ -260,6 +265,8 @@ export const getPost = async (filters: PostFilter = {}) => {
 };
 
 export const deletePost = async (id: number) => {
+  await requireAdmin();
+
   try {
     const post = await prisma.post.delete({
       where: {

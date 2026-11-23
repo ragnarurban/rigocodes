@@ -1,5 +1,6 @@
 import { Empty } from "@/components/ui/empty";
-import { deleteMessage, getMessages } from "@/lib/message";
+import { deleteMessage } from "@/lib/message";
+import { getMessages } from "@/lib/message-queries";
 
 import DeleteBtn from "../components/delete-button";
 
