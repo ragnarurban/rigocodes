@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 
 import FormField from "@/components/form-field";
+import SpamTrap from "@/components/spam-trap";
 import { createMessage } from "@/lib/message";
 
 const initialState = {
@@ -26,7 +27,8 @@ const ContactForm = () => {
         </div>
       )}
 
-      <form action={action} className="mt-10 space-y-6">
+      <form action={action} className="relative mt-10 space-y-6">
+        <SpamTrap />
         {state?.error && (
           <p className="text-sm text-destructive">{state?.error}</p>
         )}

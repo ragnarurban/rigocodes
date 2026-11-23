@@ -6,7 +6,6 @@
     "navShowcase": "Projectos",
     "navContact": "Contacto",
     "navSuggest": "Sugerencias",
-
     "titleBadge": "Disponible para nuevos proyectos · 2026",
     "title1": "Desarrollo software que ",
     "titleBold": "funciona",
@@ -62,5 +61,11 @@
     "thankYou": "Gracias por tu sugerencia!",
     "backBtn": "Inicio"
   },
-  "Blog": {}
+  "Blog": {},
+  "Forms": {
+    "tooManyRequests": "Demasiados envíos. Probá de nuevo en unos minutos.",
+    "tooManyLinks": "Tu mensaje contiene demasiados enlaces.",
+    "genericError": "Algo salió mal. Probá de nuevo más tarde.",
+    "duplicateTopic": "Por favor sugerí un tema diferente"
+  }
 }

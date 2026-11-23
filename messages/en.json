@@ -6,7 +6,6 @@
     "navShowcase": "Showcase",
     "navContact": "Contact",
     "navSuggest": "Suggest",
-
     "titleBadge": "Available for new projects",
     "title1": "I build software that ",
     "titleBold": "feels",
@@ -62,5 +61,11 @@
     "thankYou": "Thank you!",
     "backBtn": "Home"
   },
-  "Blog": {}
+  "Blog": {},
+  "Forms": {
+    "tooManyRequests": "Too many submissions. Please try again in a few minutes.",
+    "tooManyLinks": "Your message contains too many links.",
+    "genericError": "Something went wrong. Please try again later.",
+    "duplicateTopic": "Please suggest a different topic"
+  }
 }
